@@ -1,4 +1,4 @@
-//TODO: 
+//TODO: Sanitize articles so they are not related to sensitive topics (esp, killing)
 //      Modularize code
 //      Set up cron jobs to generate some funny tweets
 //          See if there are verb lists/ regexes out there
@@ -20,7 +20,7 @@ var topArticles;
 
 var url = 'http://api.nytimes.com/svc/topstories/v1/home.json?api-key=febb5d95a9a6c1462b9ef9e253ee2f04:18:71602642'
 
-var getArticlesWithBluebird = function(user) {
+var getArticles = function(user) {
   return new Promise(function(resolve, reject) {
     request(url, function (error, response, body) {
       if (error) { reject(error); }
@@ -32,23 +32,26 @@ var getArticlesWithBluebird = function(user) {
   });
 };
 
-getArticlesWithBluebird().then(function(articles){
-  var article = stringifyMessage(articles.results[0]);
-  tweet(article);
+getArticles().then(function(articles){
+  for (var i = 0; i < articles.results.length; i++) {
+    var title = stringifyMessage(articles.results[0].title);
+    var url = stringifyMessage(articles.results[0].url);
+    tweet(title, url);
+  };
 })
 
 var stringifyMessage = function(article){
-  var title = JSON.stringify(article.title);
+  var title = JSON.stringify(article);
   //remove the beginning and ending quotes
-  title = title.replace(/(['"])/g, "")
+  title = title.replace(/(['"])/g, "");
   return title;
 }
 
-var tweet = function(message){
-  T.post('statuses/update', { status: message + " in bed" }, function(err, data, response) {
+var tweet = function(message, url){
+  T.post('statuses/update', { status: message + " in bed " + url }, function(err, data, response) {
     if(err){console.log(err)}
     else{
-      console.log('Posted!')
+      console.log('Posted!');
     }
   })
 }
