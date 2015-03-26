@@ -1,0 +1,27 @@
+{
+  "name": "SamSteller",
+  "version": "1.0.0",
+  "description": "Sam Steller, delivering you daily news on twitter",
+  "main": "config.js",
+  "dependencies": {
+    "bluebird": "^2.9.14",
+    "jquery": "^2.1.3",
+    "request": "^2.53.0",
+    "twit": "^1.1.20",
+    "twitter-autofollow-bot": "^0.1.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SashaBayan/SamSteller.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SashaBayan/SamSteller/issues"
+  },
+  "homepage": "https://github.com/SashaBayan/SamSteller"
+}
