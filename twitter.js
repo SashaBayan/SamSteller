@@ -7,7 +7,8 @@ var Twit = require('twit');
 var keys = require('./config.js');
 var request = require('request');
 var Promise = require('bluebird');
-
+var twitterAutofollowBot = require('twitter-autofollow-bot');
+var db = require("./db.js");
 
 var T = new Twit({
     consumer_key:         keys.consumer_key
@@ -32,13 +33,27 @@ var getArticles = function(user) {
   });
 };
 
+
+
 getArticles().then(function(articles){
   for (var i = 0; i < articles.results.length; i++) {
-    var title = stringifyMessage(articles.results[0].title);
-    var url = stringifyMessage(articles.results[0].url);
-    tweet(title, url);
+    var title = stringifyMessage(articles.results[i].title);
+    var url = stringifyMessage(articles.results[i].url);
+    db.push("test", title)
   };
 })
+
+
+db.pop("test")
+  .then(function(msg) {
+    console.log("message: ", msg);
+    tweet(msg);  
+  })
+  .error(function(err){
+    console.log(err)
+  });
+  
+
 
 var stringifyMessage = function(article){
   var title = JSON.stringify(article);
@@ -48,7 +63,7 @@ var stringifyMessage = function(article){
 }
 
 var tweet = function(message, url){
-  T.post('statuses/update', { status: message + " in bed " + url }, function(err, data, response) {
+  T.post('statuses/update', { status: message + " in Bed" }, function(err, data, response) {
     if(err){console.log(err)}
     else{
       console.log('Posted!');

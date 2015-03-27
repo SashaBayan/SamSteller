@@ -2,3 +2,5 @@ node_modules
 
 config.js
 npm-debug.log
+
+twitter_follow_bot.py
