@@ -21,5 +21,5 @@ var pop = function(queueName){
 module.exports = {
   push: push,
   pop: pop,
-  queueName: "test1"
+  queueName: "sam_steller"
 }

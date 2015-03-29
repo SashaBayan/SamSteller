@@ -3,4 +3,6 @@ node_modules
 config.js
 npm-debug.log
 
+dump.rdb
+
 twitter_follow_bot.py

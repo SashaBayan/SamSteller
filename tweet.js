@@ -4,7 +4,11 @@ var utils = require('./utils.js');
 db.pop(db.queueName)
   .then(function(msg) {
     console.log("message: ", msg);
-    utils.tweet(msg);  
+    if(!msg){
+      console.log("no items in the queue!")
+    } else{
+      utils.tweet(msg);  
+    }
   })
   .error(function(err){
     console.log(err)

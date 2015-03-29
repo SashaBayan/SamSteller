@@ -1,0 +1,8 @@
+#seeds the database with information once per day at 6AM
+* 6 * * * /usr/bin/node /root/SamSteller/tweet.js >> /root/output.txt
+
+#runs the tweet file to send a tweet; logs output to a text file
+* */1 * * * /usr/bin/node /root/SamSteller/tweet.js >> /root/output.txt
+
+#a test to make sure the cron job is running properly
+* */1 * * * echo hello >> /root/test.txt
