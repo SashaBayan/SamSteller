@@ -22,7 +22,7 @@ var stringifyMessage = function(article){
 }
 
 var tweet = function(message, url){
-  T.post("statuses/update", { status: message + " in Bed" }, function(err, data, response) {
+  T.post("statuses/update", { status: message + " in Bed " + url  }, function(err, data, response) {
     if(err){console.log(err)}
     else{
       console.log("Posted!");

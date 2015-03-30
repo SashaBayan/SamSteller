@@ -1,2 +1,2 @@
 # SamSteller
-Sam Steller, delivering you daily news on twitter
+Sam Steller, delivering you daily news in bed

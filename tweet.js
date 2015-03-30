@@ -1,14 +1,18 @@
 var db = require('./db.js');
 var utils = require('./utils.js');
 
-db.pop(db.queueName)
+db.pop("titles")
   .then(function(msg) {
-    console.log("message: ", msg);
-    if(!msg){
-      console.log("no items in the queue!")
-    } else{
-      utils.tweet(msg);  
-    }
+    db.pop("urls")
+      .then(function(url){
+        console.log("message: ", msg);
+        console.log("url: ", url);
+        if(!msg || !url){
+          console.log("no items in the queue!")
+        } else{
+          utils.tweet(msg, url);  
+        }
+      })
   })
   .error(function(err){
     console.log(err)
