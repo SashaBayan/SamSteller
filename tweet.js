@@ -1,6 +1,7 @@
 var db = require('./db.js');
 var utils = require('./utils.js');
 
+
 db.pop("titles")
   .then(function(msg) {
     db.pop("urls")
@@ -10,7 +11,8 @@ db.pop("titles")
         if(!msg || !url){
           console.log("no items in the queue!")
         } else{
-          utils.tweet(msg, url);  
+          var hashtag = utils.randomHashTag();
+          utils.tweet(msg, url, hashtag);  
         }
       })
   })

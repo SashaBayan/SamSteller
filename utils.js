@@ -21,8 +21,17 @@ var stringifyMessage = function(article){
   return title;
 }
 
-var tweet = function(message, url){
-  T.post("statuses/update", { status: message + " in Bed " + url  }, function(err, data, response) {
+var hashtags = ["newyorktimes", "nyt", "news", "breakingnews", "important"];
+
+var randomElement = function(array){
+  var randomIndex = Math.floor(Math.random() * array.length);
+  return array[randomIndex];
+};
+
+var randomHashTag = function(){return randomElement(hashtags);}
+
+var tweet = function(message, url, hashtag){
+  T.post("statuses/update", { status: message + " in Bed " + "#" + randomHashTag() + " " + url  }, function(err, data, response) {
     if(err){console.log(err)}
     else{
       console.log("Posted!");
@@ -30,8 +39,10 @@ var tweet = function(message, url){
   })
 }
 
+
 module.exports = {
   stringifyMessage: stringifyMessage,
   tweet: tweet,
-  getArticles: getArticles
+  getArticles: getArticles,
+  randomHashTag: randomHashTag
 }
