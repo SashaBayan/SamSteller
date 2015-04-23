@@ -1,9 +1,5 @@
 node_modules
-
 config.js
 config.py
 npm-debug.log
-
 dump.rdb
-
-twitter_follow_bot.py
