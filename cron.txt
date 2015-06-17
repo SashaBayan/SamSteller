@@ -1,8 +1,15 @@
 #seeds the database with information once per day at 6AM
-* 6 * * * /usr/bin/node /root/SamSteller/tweet.js >> /root/output.txt
+0 6 * * * /usr/bin/node /root/SamSteller/tweet.js >> /root/output.txt
+
+#kill the process after one minute in order to preserve CPU
+1 6 * * * killall /usr/bin/node
 
 #runs the tweet file to send a tweet; logs output to a text file
-* */1 * * * /usr/bin/node /root/SamSteller/tweet.js >> /root/output.txt
+45 * * * * /usr/bin/node /root/SamSteller/tweet.js >> /root/output.txt
+
+#kill the process after one minute in order to preserve CPU
+46 * * * * killall /usr/bin/node
 
 #a test to make sure the cron job is running properly
-* */1 * * * echo hello >> /root/test.txt
+#* */1 * * * echo hello >> /root/test.txt
+
